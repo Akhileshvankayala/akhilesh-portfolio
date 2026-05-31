@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
     "server": "node server/index.js",
     "start": "npm run build && npm run server"
   },
@@ -79,5 +79,13 @@
     "typescript": "^5",
     "vite": "^8.0.14",
     "vitest": "^3.1.1"
+  },
+  "overrides": {
+    "vitest": {
+      "vite": "$vite"
+    },
+    "@vitest/mocker": {
+      "vite": "$vite"
+    }
   }
 }
