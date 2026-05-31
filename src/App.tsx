@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const certificatesData = [
   { name: "Connecting to a MongoDB Database", file: "24eg105g54-Connecting to a MongoDB Database Using the MongoDB Shell.pdf" },
@@ -37,6 +38,7 @@ const certificatesData = [
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -100,10 +102,23 @@ export default function Home() {
       </div>
 
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 bg-background/60 backdrop-blur-md border-b border-white/10 shadow-sm transition-all duration-300">
-        <nav className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center rounded-2xl bg-secondary/80 backdrop-blur-md px-6 py-3 shadow-lg border border-white/10">
-            <ul className="flex space-x-8">
+      <header className="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6 lg:px-8 bg-background/60 backdrop-blur-md border-b border-white/10 shadow-sm transition-all duration-300">
+        <nav className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center rounded-2xl bg-secondary/80 backdrop-blur-md px-4 sm:px-6 py-3 shadow-lg border border-white/10 relative">
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-foreground hover:text-accent-blue p-2"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+
+            {/* Desktop Navigation */}
+            <ul className="hidden md:flex space-x-8">
               {['home', 'projects', 'certifications', 'contact'].map((item) => (
                 <li key={item}>
                   <a
@@ -122,12 +137,42 @@ export default function Home() {
             
             {mounted && (
               <div
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-accent-blue to-purple-600 text-white font-bold text-xl shadow-[0_0_15px_rgba(59,130,246,0.5)] cursor-default select-none border border-white/20 hover:scale-105 transition-transform"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-accent-blue to-purple-600 text-white font-bold text-xl shadow-[0_0_15px_rgba(59,130,246,0.5)] cursor-default select-none border border-white/20 hover:scale-105 transition-transform shrink-0"
                 title="Akhilesh"
               >
                 A
               </div>
             )}
+            
+            {/* Mobile Navigation Dropdown */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="absolute top-full left-0 right-0 mt-4 bg-secondary/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl overflow-hidden md:hidden z-50"
+                >
+                  <ul className="flex flex-col py-2">
+                    {['home', 'projects', 'certifications', 'contact'].map((item) => (
+                      <li key={item}>
+                        <a
+                          href={`#${item}`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`block capitalize font-medium px-6 py-4 transition-colors ${
+                            activeSection === item
+                              ? 'text-accent-blue bg-primary/10'
+                              : 'text-foreground hover:text-accent-blue hover:bg-primary/5'
+                          }`}
+                        >
+                          {item === 'home' ? 'Home' : item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </nav>
       </header>
@@ -144,8 +189,8 @@ export default function Home() {
                 variants={fadeIn}
                 className="text-center md:text-left"
               >
-                <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground drop-shadow-md">
-                  Hi, I&apos;m <span className="text-accent-blue">Akhilesh Vankayala</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-foreground drop-shadow-md leading-tight">
+                  Hi, I&apos;m <br className="block sm:hidden" /><span className="text-accent-blue">Akhilesh Vankayala</span>
                 </h1>
                 <h2 className="text-2xl font-semibold text-muted-foreground mb-6">
                   Problem solver | A Web Developer
@@ -183,7 +228,7 @@ export default function Home() {
                   <img
                     src="./akhilesh-face.jpg"
                     alt="Akhilesh Vankayala"
-                    className="relative w-[300px] h-[300px] object-cover rounded-full border-4 border-background shadow-2xl"
+                    className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-[300px] md:h-[300px] object-cover rounded-full border-4 border-background shadow-2xl"
                   />
                 </div>
               </motion.div>
@@ -616,14 +661,14 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="flex justify-center gap-6">
-                  <a href="https://www.linkedin.com/in/akhilesh-vankayala-5ba7b1343/" className="px-6 py-3 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm">
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+                  <a href="https://www.linkedin.com/in/akhilesh-vankayala-5ba7b1343/" className="px-5 py-3 sm:px-6 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm flex-1 min-w-[120px] max-w-[200px]">
                     LinkedIn
                   </a>
-                  <a href="https://github.com/Akhileshvankayala" className="px-6 py-3 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm">
+                  <a href="https://github.com/Akhileshvankayala" className="px-5 py-3 sm:px-6 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm flex-1 min-w-[120px] max-w-[200px]">
                     GitHub
                   </a>
-                  <a href="https://www.instagram.com/akhilesh._.158/" className="px-6 py-3 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm">
+                  <a href="https://www.instagram.com/akhilesh._.158/" className="px-5 py-3 sm:px-6 bg-secondary text-accent-blue font-semibold rounded-lg hover:bg-primary/20 hover:scale-105 transition-all shadow-sm flex-1 min-w-[120px] max-w-[200px]">
                     Instagram
                   </a>
                 </div>
