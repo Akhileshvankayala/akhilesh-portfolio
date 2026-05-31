@@ -198,10 +198,22 @@ export default function Home() {
                 <div className="bg-secondary/40 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/5 shadow-lg text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto md:mx-0 space-y-4">
                   <h3 className="text-xl font-bold text-foreground mb-2">About Me</h3>
                   <p>
-                    I&apos;m a passionate Computer Science Engineering (CSE) student with a strong interest in web development, Data Structures and Algorithms (DSA), and building tech that truly makes a difference. I enjoy crafting user-friendly, clean, and responsive websites using technologies like HTML, CSS, JavaScript, Node.js, and React.
+                    Hello, my name is Akhilesh Vankayala-Computer Science Engineering student who is passionate about problem-solving and building technology solutions through software applications that create real-world impact. 
                   </p>
                   <p>
-                    I dedicate time to mastering algorithms and data structures — not just for placements, but to become a better problem solver. I love turning creative ideas into real-world tech — from smart Arduino-based gifts to helpful websites that serve a purpose. I&apos;m always exploring new tools, frameworks, and concepts to broaden my skillset and deepen my understanding of technology.
+                  My primary areas of focus are Data Structures & Algorithms and MERN stack development. I continuously work on improving my problem-solving abilities to prepare for software engineering roles while also expanding my knowledge in full-stack web development.  
+                  </p>
+                  <p>
+                  Some of the projects I have developed include a Smart Placement Tracker for managing college recruitment processes, real-time chat applications, and accessibility-focused solutions designed to help physically disabled individuals access campus resources and much more. I enjoy building practical applications that solve meaningful problems and improve user experiences. 
+                  </p>
+                  <p>
+                  Beyond coding, I strongly believe that discipline, consistency, and continuous learning are the qualities that truly differentiate a developer. My current goal is to become a skilled software engineer by mastering DSA, development, and system design fundamentals.
+                  </p>
+                  <p>
+                  Apart from technology, I also enjoy creating artwork and making handmade gifts for my loved ones, as it allows me to express creativity beyond programming.
+                  </p>
+                  <p>
+                  Thank you for reading!
                   </p>
                 </div>
                 <div className="flex flex-wrap justify-center md:justify-start gap-4">
