@@ -370,7 +370,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -470,7 +470,7 @@ export default function Home() {
                     <a href="#" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">GitHub</a>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
