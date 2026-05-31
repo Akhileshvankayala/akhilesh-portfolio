@@ -36,25 +36,10 @@ const certificatesData = [
 ];
 
 export default function Home() {
+  const [selectedCert, setSelectedCert] = useState<{name: string, file: string} | null>(null);
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
-          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          carouselRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
-        }
-      }
-    }, 3000); // Auto scroll every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -579,35 +564,14 @@ export default function Home() {
               Certifications
             </motion.h2>
             
-            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
-              {/* Carousel */}
-              <div className="w-full lg:w-1/2">
-                <div className="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-secondary/30 h-full flex flex-col justify-center">
-                  <div ref={carouselRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    {certificatesData.map((cert, index) => (
-                      <div key={index} className="min-w-full flex-shrink-0 snap-center p-2 sm:p-6">
-                        <div className="relative aspect-[4/3] bg-background/50 rounded-xl overflow-hidden border border-white/10 shadow-inner group-hover:scale-[1.01] transition-transform">
-                          <img src={`/Certificates/${cert.file}`} alt={cert.name} className="w-full h-full object-contain" />
-                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent p-4 transition-opacity">
-                            <p className="text-foreground font-semibold text-center text-sm md:text-base drop-shadow-md">{cert.name}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="absolute bottom-1 left-0 right-0 flex justify-center pointer-events-none opacity-70 overflow-hidden px-10">
-                    <p className="text-2xl  font-medium text-white">Scroll to view {certificatesData.length} certificates</p>
-                  </div>
-                </div>
-              </div>
-
+            <div className="max-w-4xl mx-auto">
               {/* Names List */}
-              <div className="w-full lg:w-1/2">
-                <div className="bg-secondary/40 backdrop-blur-md rounded-2xl p-8 border border-white/5 shadow-lg h-full">
+              <div className="w-full">
+                <div className="bg-secondary/40 backdrop-blur-md rounded-2xl p-8 border border-white/5 shadow-lg">
                   <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                    <span className="text-accent-blue text-3xl">🏆</span>Certificates(scroll to view all names)
+                    <span className="text-accent-blue text-3xl">🏆</span>Certificates
                   </h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[450px] overflow-y-auto pr-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[600px] overflow-y-auto pr-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     {certificatesData.map((cert, idx) => (
                       <motion.li 
                         key={idx}
@@ -615,18 +579,55 @@ export default function Home() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: Math.min(idx * 0.03, 0.3) }}
-                        className="flex items-start gap-2 text-muted-foreground hover:text-foreground transition-colors bg-background/30 p-2.5 rounded-lg border border-white/5 group"
+                        className="flex items-start gap-2 text-muted-foreground hover:text-foreground transition-colors bg-background/30 p-2.5 rounded-lg border border-white/5 group cursor-pointer"
+                        onClick={() => setSelectedCert(cert)}
                       >
                         <span className="text-accent-blue mt-0.5 text-xs">•</span>
-                        <a href={`/Certificates/${cert.file}`} target="_blank" rel="noreferrer" className="font-medium leading-tight text-xs hover:underline flex-1">
+                        <span className="font-medium leading-tight text-xs hover:underline flex-1 text-left">
                           {cert.name}
-                        </a>
+                        </span>
                       </motion.li>
                     ))}
                   </ul>
                 </div>
               </div>
             </div>
+
+            {/* Certificate Modal */}
+            <AnimatePresence>
+              {selectedCert && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8"
+                  onClick={() => setSelectedCert(null)}
+                >
+                  <motion.div
+                    initial={{ scale: 0.95 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0.95 }}
+                    className="relative max-w-5xl w-full max-h-full flex flex-col items-center justify-center bg-secondary/80 rounded-2xl p-4 md:p-6 overflow-hidden shadow-2xl border border-white/10"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button 
+                      onClick={() => setSelectedCert(null)}
+                      className="absolute top-2 right-2 md:top-4 md:right-4 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white transition-colors z-10"
+                    >
+                      <X size={24} />
+                    </button>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4 text-center">{selectedCert.name}</h3>
+                    <div className="w-full flex-1 flex items-center justify-center overflow-hidden">
+                      <img 
+                        src={`/Certificates/${selectedCert.file}`} 
+                        alt={selectedCert.name} 
+                        className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-lg"
+                      />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
