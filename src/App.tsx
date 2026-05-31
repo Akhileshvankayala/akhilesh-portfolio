@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { PdfViewer } from './components/PdfViewer';
 
 const certificatesData = [
   { name: "Connecting to a MongoDB Database", file: "24eg105g54-Connecting to a MongoDB Database Using the MongoDB Shell.pdf" },
@@ -588,7 +589,7 @@ export default function Home() {
                           {cert.file.endsWith('.png') ? (
                             <img src={`/Certificates/${cert.file}`} alt={cert.name} className="w-full h-full object-contain" />
                           ) : (
-                            <iframe src={`/Certificates/${cert.file}#toolbar=0&navpanes=0&scrollbar=0`} title={cert.name} className="w-full h-full pointer-events-none" />
+                            <PdfViewer file={`/Certificates/${cert.file}`} name={cert.name} />
                           )}
                           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent p-4 transition-opacity">
                             <p className="text-foreground font-semibold text-center text-sm md:text-base drop-shadow-md">{cert.name}</p>
