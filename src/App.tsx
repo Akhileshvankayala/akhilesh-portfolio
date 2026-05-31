@@ -569,7 +569,7 @@ export default function Home() {
               <div className="w-full">
                 <div className="bg-secondary/40 backdrop-blur-md rounded-2xl p-8 border border-white/5 shadow-lg">
                   <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                    <span className="text-accent-blue text-3xl">🏆</span>Certificates
+                    <span className="text-accent-blue text-3xl">🏆</span>Certificates(Click to view!)
                   </h3>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[600px] overflow-y-auto pr-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     {certificatesData.map((cert, idx) => (
