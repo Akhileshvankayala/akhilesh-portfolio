@@ -1,39 +1,38 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { PdfViewer } from './components/PdfViewer';
 
 const certificatesData = [
-  { name: "Connecting to a MongoDB Database", file: "24eg105g54-Connecting to a MongoDB Database Using the MongoDB Shell.pdf" },
-  { name: "Getting Started with MongoDB Atlas", file: "24eg105g54-Getting Started with MongoDB Atlas.pdf" },
-  { name: "Introduction to Atlas Search", file: "24eg105g54-Introduction to Atlas Search.pdf" },
-  { name: "Introduction to MongoDB", file: "24eg105g54-Introduction to MongoDB.pdf" },
-  { name: "MongoDB Aggregation", file: "24eg105g54-MongoDB Aggregation.pdf" },
-  { name: "MongoDB CRUD: Insert and Find", file: "24eg105g54-MongoDB CRUD Operations Insert and Find Documents.pdf" },
-  { name: "MongoDB CRUD: Modifying Query Results", file: "24eg105g54-MongoDB CRUD Operations Modifying Query Results.pdf" },
-  { name: "MongoDB CRUD: Replace and Delete", file: "24eg105g54-MongoDB CRUD Operations Replace and Delete Documents.pdf" },
-  { name: "MongoDB Indexes", file: "24eg105g54-MongoDB Indexes.pdf" },
-  { name: "MongoDB Transactions", file: "24eg105g54-MongoDB Transactions.pdf" },
-  { name: "MongoDB and the Document Model", file: "24eg105g54-MongoDB and the Document Model.pdf" },
-  { name: "NPTEL Programming in Java", file: "24EG105G54-NPTEL-Programming in java.pdf" },
-  { name: "Basics of DSA - Simplilearn", file: "Basics of DSA-Simplilearn.pdf" },
-  { name: "NPTEL DSA & Python", file: "NPTEL certificate Data Structures And Algorithms and also programming Using Python.pdf" },
-  { name: "Python Essentials 1", file: "Python_Essentials_1_certificate_24eg105g54-anurag-edu-in_c5170ec8-cca8-41b3-b57a-47758b005df9 (1).pdf" },
-  { name: "Python Essentials 2", file: "Python_Essentials_2_certificate_24eg105g54-anurag-edu-in_c89b6b09-61b5-4a62-80b9-a1f954b390d8.pdf" },
-  { name: "C Programming - Simplilearn", file: "Simpli learn c certificate.pdf" },
-  { name: "Software Engineering - Simplilearn", file: "software engineering-simpli learn.pdf" },
-  { name: "Design a Dream Destination (Microsoft)", file: "Design a dream destination using Microsoft Copilot _ Microsoft Learn.pdf" },
-  { name: "Dream Destination Achievements", file: "Achievements -24eg105g54_dreamdestination_ Microsoft Learn.pdf" },
-  { name: "AI and Gen AI Basics (Microsoft)", file: "Achievements -learn ai and gen ai basics _ Microsoft Learn.pdf" },
-  { name: "Explore Gen AI (Microsoft)", file: "explore gen ai _ Microsoft Learn.pdf" },
-  { name: "Cisco Intro to AI", file: "cisco-into to ai.pdf" },
-  { name: "Cisco AI Analyse", file: "cisco-ai analyse.pdf" },
+  { name: "Connecting to a MongoDB Database", file: "24eg105g54-Connecting to a MongoDB Database Using the MongoDB Shell.png" },
+  { name: "Getting Started with MongoDB Atlas", file: "24eg105g54-Getting Started with MongoDB Atlas.png" },
+  { name: "Introduction to Atlas Search", file: "24eg105g54-Introduction to Atlas Search.png" },
+  { name: "Introduction to MongoDB", file: "24eg105g54-Introduction to MongoDB.png" },
+  { name: "MongoDB Aggregation", file: "24eg105g54-MongoDB Aggregation.png" },
+  { name: "MongoDB CRUD: Insert and Find", file: "24eg105g54-MongoDB CRUD Operations Insert and Find Documents.png" },
+  { name: "MongoDB CRUD: Modifying Query Results", file: "24eg105g54-MongoDB CRUD Operations Modifying Query Results.png" },
+  { name: "MongoDB CRUD: Replace and Delete", file: "24eg105g54-MongoDB CRUD Operations Replace and Delete Documents.png" },
+  { name: "MongoDB Indexes", file: "24eg105g54-MongoDB Indexes.png" },
+  { name: "MongoDB Transactions", file: "24eg105g54-MongoDB Transactions.png" },
+  { name: "MongoDB and the Document Model", file: "24eg105g54-MongoDB and the Document Model.png" },
+  { name: "NPTEL Programming in Java", file: "24EG105G54-NPTEL-Programming in java.png" },
+  { name: "Basics of DSA - Simplilearn", file: "Basics of DSA-Simplilearn.png" },
+  { name: "NPTEL DSA & Python", file: "NPTEL certificate Data Structures And Algorithms and also programming Using Python.png" },
+  { name: "Python Essentials 1", file: "Python_Essentials_1_certificate_24eg105g54-anurag-edu-in_c5170ec8-cca8-41b3-b57a-47758b005df9 (1).png" },
+  { name: "Python Essentials 2", file: "Python_Essentials_2_certificate_24eg105g54-anurag-edu-in_c89b6b09-61b5-4a62-80b9-a1f954b390d8.png" },
+  { name: "C Programming - Simplilearn", file: "Simpli learn c certificate.png" },
+  { name: "Software Engineering - Simplilearn", file: "software engineering-simpli learn.png" },
+  { name: "Design a Dream Destination (Microsoft)", file: "Design a dream destination using Microsoft Copilot _ Microsoft Learn.png" },
+  { name: "Dream Destination Achievements", file: "Achievements -24eg105g54_dreamdestination_ Microsoft Learn.png" },
+  { name: "AI and Gen AI Basics (Microsoft)", file: "Achievements -learn ai and gen ai basics _ Microsoft Learn.png" },
+  { name: "Explore Gen AI (Microsoft)", file: "explore gen ai _ Microsoft Learn.png" },
+  { name: "Cisco Intro to AI", file: "cisco-into to ai.png" },
+  { name: "Cisco AI Analyse", file: "cisco-ai analyse.png" },
   { name: "Prompt Design in Vertex AI", file: "prompt-design-in-vertex-ai-skill-badge.png" },
   { name: "GDSC Vogue AI Participation", file: "gdsc vogue ai participation certificate.png" },
-  { name: "IBM SkillsBuild Completion", file: "Completion Certificate _ SkillsBuild-ibm.pdf" },
-  { name: "Infosys Excel 2016", file: "infosys excel 2016 course.pdf" },
-  { name: "Wadhwani - Problem Solving & Innovation", file: "Wadhwani Foundation Certificate - Problem Solving & Innovation.pdf" },
-  { name: "Wadhwani - Self-Presentation", file: "Wadhwani Foundation Certificate - Self-Presentation.pdf" }
+  { name: "IBM SkillsBuild Completion", file: "Completion Certificate _ SkillsBuild-ibm.png" },
+  { name: "Infosys Excel 2016", file: "infosys excel 2016 course.png" },
+  { name: "Wadhwani - Problem Solving & Innovation", file: "Wadhwani Foundation Certificate - Problem Solving & Innovation.png" },
+  { name: "Wadhwani - Self-Presentation", file: "Wadhwani Foundation Certificate - Self-Presentation.png" }
 ];
 
 export default function Home() {
@@ -88,7 +87,7 @@ export default function Home() {
   return (
     <>
       {/* Global Background Video */}
-      <div className="fixed inset-0 w-full h-full z-[-1]">
+      <div className="fixed inset-0 w-full h-full z-[-1] hidden md:block">
         <video
           autoPlay
           loop
@@ -101,6 +100,8 @@ export default function Home() {
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-background/70 backdrop-blur-[0px]"></div>
       </div>
+      {/* Mobile fallback background */}
+      <div className="fixed inset-0 w-full h-full z-[-1] block md:hidden bg-background"></div>
 
       {/* Header Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6 lg:px-8 bg-background/60 backdrop-blur-md border-b border-white/10 shadow-sm transition-all duration-300">
@@ -586,11 +587,7 @@ export default function Home() {
                     {certificatesData.map((cert, index) => (
                       <div key={index} className="min-w-full flex-shrink-0 snap-center p-2 sm:p-6">
                         <div className="relative aspect-[4/3] bg-background/50 rounded-xl overflow-hidden border border-white/10 shadow-inner group-hover:scale-[1.01] transition-transform">
-                          {cert.file.endsWith('.png') ? (
-                            <img src={`/Certificates/${cert.file}`} alt={cert.name} className="w-full h-full object-contain" />
-                          ) : (
-                            <PdfViewer file={`/Certificates/${cert.file}`} name={cert.name} />
-                          )}
+                          <img src={`/Certificates/${cert.file}`} alt={cert.name} className="w-full h-full object-contain" />
                           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent p-4 transition-opacity">
                             <p className="text-foreground font-semibold text-center text-sm md:text-base drop-shadow-md">{cert.name}</p>
                           </div>
