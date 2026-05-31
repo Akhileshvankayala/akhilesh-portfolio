@@ -234,7 +234,7 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                    <a href="https://slack-clone-group-project-1.vercel.app/" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">Deployed✅(Click Me!!)</a>
+                    <a href="https://slack-clone-group-project-1.vercel.app/" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">Deployed✅<br></br>Click Me!!(deployed projects take time to load..please be patient😉☺️)</a>
                     <a href="https://github.com/Akhileshvankayala/slack-clone-group-project-1" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">GitHub</a>
                   </div>
                 </div>
@@ -330,7 +330,7 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                    <a href="https://smart-placement-tracker-indol.vercel.app/login" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">Deployed✅Click Me!!)</a>
+                    <a href="https://smart-placement-tracker-indol.vercel.app/login" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">Deployed✅<br></br>Click Me!!(deployed projects take time to load..please be patient😉☺️)</a>
                     <a href="https://github.com/Akhileshvankayala/smart-placement-tracker" className="text-accent-blue hover:text-blue-500 font-medium transition-colors">GitHub</a>
                   </div>
                 </div>
